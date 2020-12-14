@@ -10,6 +10,7 @@ dependencies:
   nyxx: ^1.1.0
   nyxx_commander: ^1.0.1
   yaml: ^2.2.1
+  postgres: ^2.2.0
 
 dependency_overrides:
   nyxx:

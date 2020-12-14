@@ -1,2 +1,8 @@
 token: 'CHANGEME'
 prefix: '!'
+database:
+  host: 'localhost'
+  port: 5432
+  database: 'marx'
+  username: 'marx'
+  password: 'CHANGEME'
