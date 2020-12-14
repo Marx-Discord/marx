@@ -32,7 +32,7 @@ class DBConfig {
   final int _port;
   final String _username;
   final String _password;
-  String _db;
+  final String _db;
 
   String get host => _host;
   int get port => _port;
