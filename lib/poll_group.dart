@@ -1,7 +1,28 @@
 import 'package:nyxx/nyxx.dart';
 import 'package:nyxx_commander/commander.dart';
 
-List<String> indicators = ["🇦", "🇧", "🇨", "🇩", "🇪", "🇫", "🇬", "🇭", "🇮", "🇯", "🇰", "🇱", "🇲", "🇳", "🇴", "🇵", "🇶", "🇷", "🇸", "🇹"];
+List<String> indicators = [
+  "🇦",
+  "🇧",
+  "🇨",
+  "🇩",
+  "🇪",
+  "🇫",
+  "🇬",
+  "🇭",
+  "🇮",
+  "🇯",
+  "🇰",
+  "🇱",
+  "🇲",
+  "🇳",
+  "🇴",
+  "🇵",
+  "🇶",
+  "🇷",
+  "🇸",
+  "🇹"
+];
 
 void pollSimple(CommandContext ctx, String msg) {
   var message = ctx.channel.sendMessage(content: ctx.getQuotedText().first);
@@ -31,13 +52,13 @@ void pollAdvanced(CommandContext ctx, String msg) {
 
     var message = ctx.channel.sendMessage(embed: embed);
     message.then((sentMessage) async {
-      for(var i = 0; i < quoted.length - 1; i++) {
+      for (var i = 0; i < quoted.length - 1; i++) {
         await sentMessage.createReaction(new UnicodeEmoji(indicators[i]));
       }
     });
-  }
-  else {
-    var message = ctx.channel.sendMessage(content: "You need to provide between 2 and 20 poll options!");
+  } else {
+    var message = ctx.channel.sendMessage(
+        content: "You need to provide between 2 and 20 poll options!");
   }
 }
 
@@ -45,8 +66,9 @@ CommandGroup initializePollGroup() {
   var pollGroup = new CommandGroup(name: "poll", aliases: ["p"]);
 
   pollGroup.registerDefaultCommand((context, message) => {
-      context.reply(content: "Please specify if the poll is `simple` or `advanced`.")
-  });
+        context.reply(
+            content: "Please specify if the poll is `simple` or `advanced`.")
+      });
 
   pollGroup.registerSubCommand("simple", pollSimple);
   pollGroup.registerSubCommand("s", pollSimple);

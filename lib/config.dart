@@ -23,9 +23,7 @@ class Config {
         conf['database']['port'],
         conf['database']['database'],
         conf['database']['username'],
-        conf['database']['password']
-    );
-
+        conf['database']['password']);
   }
 }
 
@@ -41,7 +39,6 @@ class DBConfig {
   String get database => _db;
   String get username => _username;
   String get password => _password;
-
 
   DBConfig(this._host, this._port, this._db, this._username, this._password);
 }
