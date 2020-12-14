@@ -1,0 +1,34 @@
+#+TITLE: Marx
+A handy [[https://discord.com][Discord]] bot written using the [[https://dart.dev][Dart]] programming language, and the [[https://pub.dev/packages/nyxx][Nyxx]] class library.
+
+** Use the Bot
+When the bot is in a more complete state, we will go ahead and add a link here to invite the bot to your server.
+*** Commands
+**** Base Commands
+Commands with the base ~!~ prefix.
+| Command | Aliases | Description                                                           | Image             |
+|---------+---------+-----------------------------------------------------------------------+-------------------|
+| ping    | N/A     | A simple ping command. The bot will reply to the message with "Pong!" | [[./images/ping.png]] |
+|---------+---------+-----------------------------------------------------------------------+-------------------|
+
+**** Poll Commands
+Commands existing under the ~!poll~ or ~!p~ prefix.
+| Command  | Aliases | Description                                                       | Image                      |
+|----------+---------+-------------------------------------------------------------------+----------------------------|
+| simple   | s       | Creates a simple poll, intended for yes/no questions.             | [[./images/simple_poll.png]]   |
+| advanced | a, adv  | Creates an advanced poll, intended for multpile choice questions. | [[./images/advanced_poll.png]] |
+|----------+---------+-------------------------------------------------------------------+----------------------------|
+
+** Contributing
+Contributions must be made from a branch of a fork of the repository. The branch should be named according to the standards outlined below. You also need to run a =dart analyze= on the project before committing changes, to be sure to follow style requirements.
+Commit messages should be professional. We all get frustrated at times, but commits with messages like "Commas are dumb" will be rejected.
+Never make a pull request that doesn't compile and run. These will also be rejected until they are fixed.
+*** Branch Name Guidelines
+Branches are named with a prefix, and a description. This makes it simple to understand the purpose of a branch when reviewing pull requests. A branch should only make one major change to the code base.
+
+| Prefix   | Purpose                                                                                                                     | Example                      |
+|----------+-----------------------------------------------------------------------------------------------------------------------------+------------------------------|
+| feature/ | Adding features to the bot                                                                                                  | ~feature/add-mysql-support~  |
+| doc/     | Update documentation, such as READMEs or DartDoc comments                                                                   | ~doc/update-readme-commands~ |
+| fix/     | Anything related to bug fixes. If intended for fixing a GitHub issue, please reference the issue number in the branch name. | ~fix/27-mysql-syntax-error~  |
+|----------+-----------------------------------------------------------------------------------------------------------------------------+------------------------------|
