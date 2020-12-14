@@ -15,7 +15,7 @@ jobs:
     # available. See https://hub.docker.com/r/google/dart/ for the available
     # images.
     container:
-      image:  google/dart:1.12-dev
+      image:  google/dart:2.12-dev
 
     steps:
       - uses: actions/checkout@v2
