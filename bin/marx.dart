@@ -2,6 +2,7 @@ import 'package:marx/config.dart';
 import 'package:marx/base_group.dart';
 import 'package:marx/database.dart';
 import 'package:marx/poll_group.dart';
+import 'package:marx/migrate.dart';
 
 import 'package:nyxx/nyxx.dart';
 import 'package:nyxx_commander/commander.dart';
@@ -9,15 +10,20 @@ import 'package:nyxx_commander/commander.dart';
 Config config = Config();
 Database database = Database();
 
-void main() {
-  database.connect();
+void main(List<String> args) async {
+  await database.connect();
+
+  if(args.contains('--migrate') || args.contains('-m')) {
+    print('[Marx] Attempting to migrate any database changes.');
+    await migrate();
+    }
+
   final bot = Nyxx(config.token, 1607);
 
   var baseGroup = initializeBaseGroup();
   var pollGroup = initializePollGroup();
 
   Commander(bot,
-      prefix: config.prefix,
       beforeCommandHandler: passHandler,
       prefixHandler: prefixHandler)
     ..registerCommandGroup(baseGroup)
@@ -31,13 +37,16 @@ bool passHandler(CommandContext context) {
 }
 
 Future<String> prefixHandler(Message msg) async {
-  print('CHECKING PREFIX');
   if (!(msg is GuildMessage)) return config.prefix;
 
   var query = await database.connection.query(
       'SELECT prefix FROM guilds WHERE id = @id;',
-      substitutionValues: {'id': (msg as GuildMessage).guild.id});
-  print(query);
+      substitutionValues: {'id': (msg as GuildMessage).guild.id.id});
+
+  if(query.isNotEmpty) {
+    var prefix = query.first.first;
+    return prefix;
+  }
 
   return config.prefix;
 }
