@@ -53,6 +53,6 @@ Future<String> prefixHandler(Message msg) async {
 
 void onGuildCreate(GuildCreateEvent event) async {
   await database.connection.query(
-      'INSERT INTO guilds (id) VALUES (@id) ON CONFLICT DO NOTHING;',
-      substitutionValues: {'id': event.guild.id.id});
+      'INSERT INTO guilds (id, prefix) VALUES (@id, @prefix) ON CONFLICT DO NOTHING;',
+      substitutionValues: {'id': event.guild.id.id, 'prefix': config.prefix});
 }
