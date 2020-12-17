@@ -3,16 +3,13 @@ import 'package:marx/database.dart';
 
 Database database = Database();
 
-void main() async {
-  await database.connect();
-  print('Migrating database to the latest revision..');
-
+void migrate() async {
   var dir = Directory('./migrations');
   await dir
       .list(recursive: false, followLinks: false)
       .listen((FileSystemEntity entity) async {
     var fileName =
-        entity.path.split('/').last.split('\\').last.replaceFirst('.sql', '');
+    entity.path.split('/').last.split('\\').last.replaceFirst('.sql', '');
     var response = await database.connection.query(
         "SELECT EXISTS( SELECT 1 FROM information_schema.tables WHERE table_name = 'migrations' and table_schema='public');");
     var migrated_once = false;
@@ -36,7 +33,6 @@ void main() async {
     if (entity is File) contents = entity.readAsStringSync();
 
     if (contents != null) {
-      print('migrating ${fileName}');
       await database.connection.execute(contents);
       await database.connection.query(
           'INSERT INTO migrations (migration) VALUES (@migration)',
